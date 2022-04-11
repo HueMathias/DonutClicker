@@ -3,7 +3,9 @@ $(document).ready(function(){
     $("#jeuComplet").hide(); 
     $("#mode").hide();   
     $("#fin").hide();   
-    $("#infos").hide();                              
+    $("#infos").hide();
+    $("#upgrade").hide();
+    $("#clickBySecond").hide();
 });
 
 function Mode(){
@@ -29,7 +31,9 @@ function Begin(){
     begin = 1;
     $('#menu').hide();
     $("#fin").hide();  
-    
+
+    $("#clickBySecond").show();    
+    $("#upgrade").show();
     $('#jeu').show();    
     $('#upgrade').show();  
     $('#zoneBas').show();  
@@ -39,6 +43,8 @@ function Begin(){
     $("#clickUpgrade").hide();
     $("#debutantUpgrade").hide();
     $("#interUpgrade").hide();
+    $("#proUpgrade").hide();
+    $("#expertUpgrade").hide();
     
     //Taille du donut en fonction de la difficulté
     if (difficulte == 3){
@@ -61,6 +67,8 @@ function Begin(){
     document.getElementById("clickCost").value = clickCost;
     document.getElementById("clickDebutant").value = clickDebutant;
     document.getElementById("clickInter").value = clickInter;
+    document.getElementById("clickPro").value = clickPro;
+    document.getElementById("clickExpert").value = clickExpert;
 
     if (difficulte == 1)
         multiplicateur = 3;
@@ -68,9 +76,9 @@ function Begin(){
     document.getElementById("MonScore").value = score;
 
     //Apparition du bonus
-     setInterval( async function(){
-        var aleat1 = Math.floor(Math.random() * (520 - 490)) + 490; //X
-        var aleat2 = Math.floor(Math.random() * (1490 - 25)) + 25;  //Y
+    setInterval( async function(){
+        var aleat1 = Math.floor(Math.random() * (570 - 480)) + 480; //Y
+        var aleat2 = Math.floor(Math.random() * (1300 - 1)) + 1;  //X
         
         $('#bonus').show();
         $('#bonus').offset({left:aleat2, top:aleat1});      

@@ -58,6 +58,47 @@ function UpgradeInter(){
     AffichageInterAmeliorer();
 }
 
+function UpgradePro() {
+    var clickProAvant = 0;
+    if (score >= clickPro) {
+        score -= clickPro;
+
+        //Gère l'augmentation du coût
+        clickProAvant = clickPro;
+        clickPro = clickPro + clickProBefore;
+        clickProBefore = clickProAvant;
+
+        //Augmente le nb de points par seconde
+        pointPassif += 50;
+
+        //Change valeurs affichées
+        document.getElementById("clickPro").value = clickPro;
+        document.getElementById("MonScore").value = score;
+    }
+    AffichageProAmeliorer();
+}
+
+function UpgradeExpert() {
+    var clickExpertAvant = 0;
+    if (score >= clickExpert) {
+        score -= clickExpert;
+
+        //Gère l'augmentation du coût
+        clickExpertAvant = clickExpert;
+        clickExpert = clickExpert + clickExpertBefore;
+        clickExpertBefore = clickExpertAvant;
+
+        //Augmente le nb de points par seconde
+        pointPassif += 100;
+
+        //Change valeurs affichées
+        document.getElementById("clickExpert").value = clickExpert;
+        document.getElementById("MonScore").value = score;
+    }
+    AffichageExpertAmeliorer();
+}
+
+
 function Upgrade(cpt){
     //Affiche le texte de l'amélioration en vert quand on clique sur le bouton améliorer
     switch (cpt){
@@ -77,6 +118,18 @@ function Upgrade(cpt){
             $("#txtUp3").css("color", "green");
             setTimeout(function(){
                 $("#txtUp3").css("color", "white");
+            }, 300);
+            break;
+        case 4:
+            $("#txtUp4").css("color", "green");
+            setTimeout(function () {
+                $("#txtUp4").css("color", "white");
+            }, 300);
+            break;
+        case 5:
+            $("#txtUp5").css("color", "green");
+            setTimeout(function () {
+                $("#txtUp5").css("color", "white");
             }, 300);
             break;
     }    

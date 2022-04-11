@@ -40,6 +40,8 @@
                     AffichageClickAmeliorer();
                     AffichageDebutantAmeliorer();
                     AffichageInterAmeliorer();
+                    AffichageProAmeliorer();
+                    AffichageExpertAmeliorer();
                 }               
 
                 function ClickRate(){ 
@@ -96,6 +98,22 @@
                         $("#interUpgrade").show();
                     else
                     $("#interUpgrade").hide();
+                }
+
+                function AffichageProAmeliorer() {
+                    //Gère affichage du bouton améliorer intermédiaire en fonction du score
+                    if (score >= clickPro)
+                        $("#proUpgrade").show();
+                    else
+                        $("#proUpgrade").hide();
+                }
+
+                function AffichageExpertAmeliorer() {
+                    //Gère affichage du bouton améliorer intermédiaire en fonction du score
+                    if (score >= clickExpert)
+                        $("#expertUpgrade").show();
+                    else
+                        $("#expertUpgrade").hide();
                 }                
 
                 //Gère les points passifs
@@ -173,25 +191,27 @@
                             $("#debutantUpgrade").click();
                         else if ((keynum == 51 || keynum == 99) && score >= clickInter)
                             $("#interUpgrade").click();
+                        else if ((keynum == 52 || keynum == 100) && score >= clickPro)
+                            $("#proUpgrade").click();
                     } 
                     //console.log(keynum);                                         
                 }
                 
             </script>
         </head>
-        <body onkeydown="Clavier(event)">  
+        <body onkeydown="Clavier(event)">
             <div id="menuComplet">
                 <center>
                     <div id="menu">
-                        <h1>D &nbsp; nuts clicker</h1>   
-                        <img id="donutMenu" src="img/donuts.png" class="rotate" /> 
+                        <h1>D &nbsp; nuts clicker</h1>
+                        <img id="donutMenu" src="img/donuts.png" class="rotate" />
                         <input type="button" onclick="Begin()" value="START" /><br />
                         <input type="button" onclick="Mode()" value="MODE" /><br />
                         <input type="button" onclick="Infos()" value="INFOS" /><br />
-                        <img id="homer" src="img/homer.gif" /> 
+                        <img id="homer" src="img/homer.gif" />
                     </div>
                 </center>
-                
+
                 <center id="mode">
                     <div>
                         <h1>Choisissez le mode</h1>
@@ -211,13 +231,14 @@
                             Il y a aussi des bonus qui apparaissent &nbsp;&nbsp;&nbsp;&nbsp;, vous pouvez soit avoir un bonus de score soit un multiplicateur.<br />
                             Des améliorations sont disponibles, vous pouvez améliorer les points gagnés par le click mais également <br />
                             obtenir des clicks passifs. <br />
-                            Vous pouvez faire vos améliorations avec les touches numériques. <br />
+                            Vous pouvez faire vos améliorations avec les touches numériques. 
+                            Des sons ont été ajouté quand vous cliquez sur le donut ou à côté. <br />
                             3 niveaux de difficultés sont à votre disposition, à vous de les tester !<br />
                         </p>
                         <input type="button" onclick="Retour();" value="Retour" /><br />
                     </div>
                 </center>
-            </div>         
+            </div>
 
             <center id="fin">
                 <div>
@@ -228,48 +249,57 @@
                 </div>
             </center>
 
+            <div id="upgrade">
+                <p class="amelioration">
+                    <span id="txtUp1">Coût amélioration du click :</span>
+                    <input type="text" value="" id="clickCost" disabled /><br />
+                    <input type="button" value="Améliorer" id="clickUpgrade" class="transitionBouton" onclick="UpgradeClick();Upgrade(1);" />
+                </p>
+
+                <p class="amelioration">
+                    <span id="txtUp2">Clicker débutant :</span>
+                    <input type="text" value="" id="clickDebutant" disabled /><br />
+                    <input type="button" value="Améliorer" id="debutantUpgrade" class="transitionBouton" onclick="UpgradeDebutant();Upgrade(2)" />
+                </p>
+
+                <p class="amelioration">
+                    <span id="txtUp3">Clicker intermédiaire :</span>
+                    <input type="text" value="" id="clickInter" disabled /><br />
+                    <input type="button" value="Améliorer" id="interUpgrade" class="transitionBouton" onclick="UpgradeInter();Upgrade(3)" />
+                </p>
+
+                <p class="amelioration">
+                    <span id="txtUp4">Clicker Pro :</span>
+                    <input type="text" value="" id="clickPro" disabled /><br />
+                    <input type="button" value="Améliorer" id="proUpgrade" class="transitionBouton" onclick="UpgradePro();Upgrade(4)" />
+                </p>
+
+                <p class="amelioration">
+                    <span id="txtUp5">Clicker Expert :</span>
+                    <input type="text" value="" id="clickExpert" disabled /><br />
+                    <input type="button" value="Améliorer" id="expertUpgrade" class="transitionBouton" onclick="UpgradeExpert();Upgrade(5)" />
+                </p>
+            </div>
+            
+            <p id="clickBySecond">
+                Clicks / seconde : <input type="text" value="" id="clicksSeconde" disabled /><br />
+            </p>
+
             <div id="jeuComplet">
-                <center id="jeu">                
+                <center id="jeu">
                     <div id="zoneDonut">
                         <audio id="crocDonut" src="sound/croc.mp3"></audio>
                         <audio id="doh" src="sound/doh.mp3"></audio>
-                        <img id="black" src="img/black.png" onclick="ClickRate()" />  
-                        <img id="donut" src="img/donuts.png" class="rotate" title="Click" onclick="DonutsClick()" />                 
+                        <img id="black" src="img/black.png" onclick="ClickRate()" />
+                        <img id="donut" src="img/donuts.png" class="rotate" title="Click" onclick="DonutsClick()" />
                     </div><br />
-                    <input type="text" value="" id="MonScore" disabled="true" /> 
-                    <input id="affichageBonus" type="button" value="" disabled="true" />
-                </center>     
-                
-                
+                    <input type="text" value="" id="MonScore" disabled />
+                    <input id="affichageBonus" type="button" value="" disabled />
+                </center>
 
-                <div id="upgrade">                
-                    <p class="amelioration">
-                        <span id="txtUp1">Coût amélioration du click :</span>
-                        <input type="text" value="" id="clickCost" disabled="true" /><br />
-                        <input type="button" value="Améliorer" id="clickUpgrade" class="transitionBouton" onclick="UpgradeClick();Upgrade(1);" />                  
-                    </p>
-                    
-                    <p class="amelioration">
-                        <span id="txtUp2">Clicker débutant :</span>
-                        <input type="text" value="" id="clickDebutant" disabled="true" /><br />
-                        <input type="button" value="Améliorer" id="debutantUpgrade" class="transitionBouton" onclick="UpgradeDebutant();Upgrade(2)" />
-                    </p>
-
-                    <p class="amelioration">
-                        <span id="txtUp3">Clicker intermédiaire :</span>
-                        <input type="text" value="" id="clickInter" disabled="true" /><br />
-                        <input type="button" value="Améliorer" id="interUpgrade" class="transitionBouton" onclick="UpgradeInter();Upgrade(3)" />
-                    </p>
-                    <p>
-                        Clicks par seconde :
-                        <input type="text" value="" id="clicksSeconde" disabled="true" /><br />
-                    </p>
-                </div>
-                
                 <div id="zoneBas">
-                    <img id="bonus" src="img/donuts2.png" title="Click" onclick="ValiderBonus()" />                               
+                    <img id="bonus" src="img/donuts2.png" title="Click" onclick="ValiderBonus()" />
                 </div>
             </div>
         </body>
     </html>
-    <script type="text/javascript"> 

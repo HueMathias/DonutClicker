@@ -18,3 +18,11 @@ var clickDebutantBefore = 400;
 //Coût passif intermédiaire
 var clickInter = 1000;
 var clickInterBefore = 800;
+
+//Coût passif pro
+var clickPro = 2500;
+var clickProBefore = 1000;
+
+//Coût passif expert
+var clickExpert = 4000;
+var clickExpertBefore = 1500;
