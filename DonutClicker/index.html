@@ -1,0 +1,275 @@
+<doctype html>
+    <html>
+        <head>
+            <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+            <script src="js/variables.js"></script>
+            <script src="js/menu.js"></script>
+            <script src="js/difficultes.js"></script>
+            <script src="js/upgrades.js"></script>
+            <link rel="stylesheet" type="text/css" href="css/css.css" />
+            <link rel="stylesheet" type="text/css" href="css/animations.css" />
+            <!--                
+                MALUS QUI POP SUR PAGE
+                A UN CERTAINS POINT HOMER ARRIVE DE LA GAUCHE POUR MANGER LE DONUT : PLUS ON CLICK PLUS ON L'ELOIGNE ET LE DONUT NE BOUGE PLUS
+            -->
+            
+            <script type="text/javascript">               
+
+                $(document).mouseup(function(event){
+                    //console.log(event.pageX + " " + event.pageY);
+                });             
+
+                function DonutsClick(){                     
+                    document.getElementById("crocDonut").play();                    
+
+                    if (cptRate != 0)
+                        cptRate--;
+                    else if($("#donut").width() <= 200){
+                        var donutWidth = $("#donut").width();
+                        var donutHeight = $("#donut").height();
+
+                        $("#donut").css("width", donutWidth + 10);
+                        $("#donut").css("height", donutHeight + 10);
+                    }                    
+                    
+                    MoveDonut();
+                    //Gère le score
+                    score += pointClick * multiplicateur;
+                    document.getElementById("MonScore").value = score;  
+                    
+                    AffichageClickAmeliorer();
+                    AffichageDebutantAmeliorer();
+                    AffichageInterAmeliorer();
+                }               
+
+                function ClickRate(){ 
+                    if ((difficulte == 2 || difficulte == 0) && $("#donut").width() < 70){
+                        $("#fin").show();
+
+                        $('#jeu').hide();
+                        $('#upgrade').hide();
+                        $('#affichageBonus').hide();    
+                        $("#zoneBas").hide();
+                        return;
+                    }
+                    else if (difficulte == 3 && $("#donut").width() < 70){
+                        $("#fin").show();
+
+                        $('#jeu').hide();
+                        $('#upgrade').hide();
+                        $('#affichageBonus').hide();    
+                        $("#zoneBas").hide();
+                        return;
+                    }
+
+                    var donutWidth = $("#donut").width();
+                    var donutHeight = $("#donut").height();
+
+                    $("#donut").css("width", donutWidth - 10);
+                    $("#donut").css("height", donutHeight - 10);
+
+                    cptRate = 9;
+                    document.getElementById("doh").play();                    
+                }
+
+                function AffichageClickAmeliorer(){
+                    //Gère affichage du bouton améliorer du click en fonction du score
+                    if (score >= clickCost){
+                        $("#clickUpgrade").show();
+                    }
+                        
+                    else
+                    $("#clickUpgrade").hide();
+                }
+
+                function AffichageDebutantAmeliorer(){
+                    //Gère affichage du bouton améliorer débutant en fonction du score
+                    if (score >= clickDebutant)
+                        $("#debutantUpgrade").show();
+                    else
+                    $("#debutantUpgrade").hide();
+                }
+
+                function AffichageInterAmeliorer(){
+                    //Gère affichage du bouton améliorer intermédiaire en fonction du score
+                    if (score >= clickInter)
+                        $("#interUpgrade").show();
+                    else
+                    $("#interUpgrade").hide();
+                }                
+
+                //Gère les points passifs
+                setInterval(function(){
+                    document.getElementById("clicksSeconde").value = pointPassif; 
+                    score += pointPassif * multiplicateur;
+                    document.getElementById("MonScore").value = score;
+
+                    AffichageClickAmeliorer();
+                    AffichageDebutantAmeliorer();
+                    AffichageInterAmeliorer();
+                }, 1000);                
+
+                //Quand on a cliqué sur le bonus
+                async function ValiderBonus(){
+                    var choixBonus = Math.floor(Math.random() * (6 - 1)) + 1;
+                    var bonusPoint = 0;
+                    var newMultiplicateur = 0;
+
+                    switch(choixBonus){
+                        case 1:
+                            bonusPoint = 100;
+                            break;
+                        case 2 :
+                            bonusPoint = 500;
+                            break;
+                        case 3:
+                            bonusPoint = 1000;
+                            break;
+                        case 4:
+                            newMultiplicateur = 2;
+                            break;
+                        case 5: 
+                            newMultiplicateur = 4;
+                            break;
+                        case 6:
+                            newMultiplicateur = 8;
+                            break;                          
+                    }
+                    $("#bonus").hide();
+                    //Réinitialise le multiplicateur et affiche le bonus
+                    if (newMultiplicateur != 0){
+                        multiplicateur = newMultiplicateur;
+                        document.getElementById("affichageBonus").value = "X " + multiplicateur;
+                        await delay(5000); 
+                        if (difficulte == 1)
+                            multiplicateur = 3;
+                        else
+                            multiplicateur = 1;
+
+                        document.getElementById("affichageBonus").value = "";
+                    }             
+                    else {
+                        document.getElementById("affichageBonus").value = "+ " + bonusPoint;
+                        if (difficulte == 1)
+                            score += bonusPoint * 3;
+                        else
+                            score += bonusPoint;
+                        await delay(3000); 
+                        document.getElementById("affichageBonus").value = "";
+                    }                   
+                } 
+                
+                function Clavier(e) {                    
+                    var keynum;
+                    if (window.event) // IE                    
+                        keynum = e.keyCode;                    
+                    else if (e.which) // Netscape/Firefox/Opera
+                        keynum = e.which;                    
+                    
+                    if (begin == 1){
+                        if ((keynum == 49 || keynum == 97) && score >= clickCost)
+                            $("#clickUpgrade").click();
+                        else if ((keynum == 50 || keynum == 98) && score >= clickDebutant)
+                            $("#debutantUpgrade").click();
+                        else if ((keynum == 51 || keynum == 99) && score >= clickInter)
+                            $("#interUpgrade").click();
+                    } 
+                    //console.log(keynum);                                         
+                }
+                
+            </script>
+        </head>
+        <body onkeydown="Clavier(event)">  
+            <div id="menuComplet">
+                <center>
+                    <div id="menu">
+                        <h1>D &nbsp; nuts clicker</h1>   
+                        <img id="donutMenu" src="img/donuts.png" class="rotate" /> 
+                        <input type="button" onclick="Begin()" value="START" /><br />
+                        <input type="button" onclick="Mode()" value="MODE" /><br />
+                        <input type="button" onclick="Infos()" value="INFOS" /><br />
+                        <img id="homer" src="img/homer.gif" /> 
+                    </div>
+                </center>
+                
+                <center id="mode">
+                    <div>
+                        <h1>Choisissez le mode</h1>
+                        <input type="button" onclick="difficulte = 1;Retour();" value="Facile" /><br />
+                        <input type="button" onclick="difficulte = 2;Retour();" value="Moyen" /><br />
+                        <input type="button" onclick="difficulte = 3;Retour();" value="Difficile" /><br />
+                    </div>
+                </center>
+
+                <center id="infos">
+                    <div>
+                        <h1>Informations sur le jeu</h1>
+                        <img id="bonusInfos" src="img/donuts2.png" />
+                        <p>
+                            Ce jeu est un clicker.<br />
+                            C'est à dire que le but du jeu et d'avoir le score le plus élevé en cliquant sur le donut.<br />
+                            Il y a aussi des bonus qui apparaissent &nbsp;&nbsp;&nbsp;&nbsp;, vous pouvez soit avoir un bonus de score soit un multiplicateur.<br />
+                            Des améliorations sont disponibles, vous pouvez améliorer les points gagnés par le click mais également <br />
+                            obtenir des clicks passifs. <br />
+                            Vous pouvez faire vos améliorations avec les touches numériques. <br />
+                            3 niveaux de difficultés sont à votre disposition, à vous de les tester !<br />
+                        </p>
+                        <input type="button" onclick="Retour();" value="Retour" /><br />
+                    </div>
+                </center>
+            </div>         
+
+            <center id="fin">
+                <div>
+                    <h1>Vous avez perdu</h1>
+                    <input id="rejouer" type="button" value="Rejouer" onclick="Begin()" /><br />
+                    <input id="retour" type="button" value="Retour" onclick="Retour()" /><br />
+                    <input id="quitter" type="button" value="Quitter" onclick="window.close();" /><br />
+                </div>
+            </center>
+
+            <div id="jeuComplet">
+                <center id="jeu">                
+                    <div id="zoneDonut">
+                        <audio id="crocDonut" src="sound/croc.mp3"></audio>
+                        <audio id="doh" src="sound/doh.mp3"></audio>
+                        <img id="black" src="img/black.png" onclick="ClickRate()" />  
+                        <img id="donut" src="img/donuts.png" class="rotate" title="Click" onclick="DonutsClick()" />                 
+                    </div><br />
+                    <input type="text" value="" id="MonScore" disabled="true" /> 
+                    <input id="affichageBonus" type="button" value="" disabled="true" />
+                </center>     
+                
+                
+
+                <div id="upgrade">                
+                    <p class="amelioration">
+                        <span id="txtUp1">Coût amélioration du click :</span>
+                        <input type="text" value="" id="clickCost" disabled="true" /><br />
+                        <input type="button" value="Améliorer" id="clickUpgrade" class="transitionBouton" onclick="UpgradeClick();Upgrade(1);" />                  
+                    </p>
+                    
+                    <p class="amelioration">
+                        <span id="txtUp2">Clicker débutant :</span>
+                        <input type="text" value="" id="clickDebutant" disabled="true" /><br />
+                        <input type="button" value="Améliorer" id="debutantUpgrade" class="transitionBouton" onclick="UpgradeDebutant();Upgrade(2)" />
+                    </p>
+
+                    <p class="amelioration">
+                        <span id="txtUp3">Clicker intermédiaire :</span>
+                        <input type="text" value="" id="clickInter" disabled="true" /><br />
+                        <input type="button" value="Améliorer" id="interUpgrade" class="transitionBouton" onclick="UpgradeInter();Upgrade(3)" />
+                    </p>
+                    <p>
+                        Clicks par seconde :
+                        <input type="text" value="" id="clicksSeconde" disabled="true" /><br />
+                    </p>
+                </div>
+                
+                <div id="zoneBas">
+                    <img id="bonus" src="img/donuts2.png" title="Click" onclick="ValiderBonus()" />                               
+                </div>
+            </div>
+        </body>
+    </html>
+    <script type="text/javascript"> 

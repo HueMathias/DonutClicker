@@ -1,0 +1,48 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: black;
+}
+
+/* -- Menu au chargement de la page -- */
+#menu, #mode, #fin, #infos{ color:white;}
+#menu h1, #mode h1, #fin h1, #infos h1 {font-size: 50px;margin-top: 5%;text-decoration: underline;}
+#menu input, #mode input, #fin input, #infos input {width: auto;height: 50px;font-size: 35px; font-weight: bold; border:thick double rgb(0, 0, 0);cursor:pointer;margin-bottom: 10px;}
+#infos p {font-size: 28px;margin-top: 5%;text-align: left;margin-left:10%;}
+
+#homer{width: auto; height: 300px;margin-top: 50px;}
+#donutMenu{position: absolute;height: 48px;width: 48px;margin-left: -76px;margin-top: -85px;}
+#bonusInfos { position: absolute; width: 30px; height: 30px; margin-top:108px; margin-left: -118px;}
+
+/* -- -- -- */
+
+/* -- Donut et score -- */
+#zoneDonut{border : solid black 3px;height: 400px;width: 500px;}
+
+#black {position: absolute;width: 915px;height: 425px;z-index: 0;margin-left: -550px;margin-top: -10px;/*border : 1px solid white;*/}
+#donut{position: absolute;margin-top: 50px;height: 300px;width: 300px;cursor: pointer;user-select: none;z-index: 1;}
+#donut:focus{outline:none;}
+
+#monScore{background-color: white;text-align: center;border-radius: 5px;}
+
+/* -- -- -- */
+
+/* -- Tableau avec les améliorations -- */
+#upgrade{background-color: rgb(76, 69, 69);color: white;margin-top: -400px;margin-left: 75%;padding: 2px 2px 2px 5px;height: 250px;}
+#upgrade input[type="text"]{float: right;width: 150px;text-align: center;}
+#clickCost:focus{outline:none;}
+#upgrade input[type="button"]{margin-left: 64%; margin-top: 1%; width: 120px; border:none;height: 20px;}
+#upgrade input[type="button"]:hover{cursor: pointer; background-color: white; font-weight: bold; font-size: 14px;}
+
+.amelioration{height: 40px;}
+
+/* -- -- -- */
+
+/*Bonus*/
+#zoneBas{width: 100%;height: 200px;margin-top: 170px;}
+#bonus{width: 50px;height: 50px;display:none}
+#bonus:hover{cursor: pointer;}
+#bonus:focus{outline:none;}
+#affichageBonus{width: auto; height: 50px; color:red;font-size:50px;background-color: black; 
+                border:none;position: absolute;margin-top:-18px; margin-left:20px;}
+
+/* -- -- -- */
