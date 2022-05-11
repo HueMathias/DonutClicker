@@ -5,19 +5,13 @@ body{
 
 /* -- Menu au chargement de la page -- */
 #menu, #mode, #fin, #infos{ color:white;}
-#menu h1, #mode h1, #fin h1, #infos h1 {font-size: 50px;margin-top:1%;text-decoration: underline;}
+#menu h1, #mode h1, #fin h1, #infos h1 {font-size: 50px;margin-top: 5%;text-decoration: underline;}
 #menu input, #mode input, #fin input, #infos input {width: auto;height: 50px;font-size: 35px; font-weight: bold; border:thick double rgb(0, 0, 0);cursor:pointer;margin-bottom: 10px;}
-#infos p {font-size: 28px;margin-top: 5%;text-align: justify;margin-left:10%;margin-right:10%;}
+#infos p {font-size: 28px;margin-top: 5%;text-align: left;margin-left:10%;}
 
-#homer{width: auto; height: 50%;margin-top: 1%;}
+#homer{width: auto; height: 300px;margin-top: 50px;}
 #donutMenu{position: absolute;height: 48px;width: 48px;margin-left: -76px;margin-top: -85px;}
-#bonusInfos {
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    margin-top: 100px;
-    margin-left: -34px;
-}
+#bonusInfos { position: absolute; width: 30px; height: 30px; margin-top:108px; margin-left: -118px;}
 
 /* -- -- -- */
 
@@ -33,67 +27,18 @@ body{
 /* -- -- -- */
 
 /* -- Tableau avec les améliorations -- */
-#upgrade {
-    background-color: rgb(76, 69, 69);
-    color: white;
-    margin-left: 77%;
-    padding: 2px 2px 2px 5px;
-    height: 50%;
-    position: absolute;
-    overflow-y: scroll;
-}
-
-#upgrade::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-    border-radius: 10px;
-    background-color: black;
-}
-
-#upgrade::-webkit-scrollbar {
-    width: 12px;
-    background-color: black;
-}
-
-    #upgrade::-webkit-scrollbar-thumb {
-        border-radius: 10px;
-        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-        background-color: rgb(76, 69, 69);
-    }
-
-
-#upgrade input[type="text"]{margin-left:25%;width: 150px;text-align: center;}
+#upgrade{background-color: rgb(76, 69, 69);color: white;margin-top: -400px;margin-left: 75%;padding: 2px 2px 2px 5px;height: 250px;}
+#upgrade input[type="text"]{float: right;width: 150px;text-align: center;}
 #clickCost:focus{outline:none;}
-#upgrade input[type="button"]{margin-left: 31%; margin-top: 1%; width: 120px; border:none;height: 20px;}
+#upgrade input[type="button"]{margin-left: 64%; margin-top: 1%; width: 120px; border:none;height: 20px;}
 #upgrade input[type="button"]:hover{cursor: pointer; background-color: white; font-weight: bold; font-size: 14px;}
 
-.amelioration {
-    height: 18%;
-    padding: 0 1%;
-}
-
-#clickBySecond {
-    position: absolute;
-    color: white;
-    margin: 0;
-    margin-left: 77%;
-    margin-top: 24%;
-}
-
-#clickBySecond input {
-    width: 33%;
-    text-align: center;
-    color: white;
-    font-weight: bold;
-    font-size: 13px;
-    background-color:transparent;
-    box-shadow:none;
-    border:none;
-}
+.amelioration{height: 40px;}
 
 /* -- -- -- */
 
 /*Bonus*/
-#zoneBas{width: 100%;height: 27%;}
+#zoneBas{width: 100%;height: 200px;margin-top: 170px;}
 #bonus{width: 50px;height: 50px;display:none}
 #bonus:hover{cursor: pointer;}
 #bonus:focus{outline:none;}
