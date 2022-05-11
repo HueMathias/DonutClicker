@@ -46,21 +46,11 @@
 
                 function ClickRate(){ 
                     if ((difficulte == 2 || difficulte == 0) && $("#donut").width() < 70){
-                        $("#fin").show();
-
-                        $('#jeu').hide();
-                        $('#upgrade').hide();
-                        $('#affichageBonus').hide();    
-                        $("#zoneBas").hide();
+                        Fin();
                         return;
                     }
                     else if (difficulte == 3 && $("#donut").width() < 70){
-                        $("#fin").show();
-
-                        $('#jeu').hide();
-                        $('#upgrade').hide();
-                        $('#affichageBonus').hide();    
-                        $("#zoneBas").hide();
+                        Fin();
                         return;
                     }
 
@@ -125,6 +115,7 @@
                     AffichageClickAmeliorer();
                     AffichageDebutantAmeliorer();
                     AffichageInterAmeliorer();
+                    AffichageExpertAmeliorer();
                 }, 1000);                
 
                 //Quand on a cliqué sur le bonus

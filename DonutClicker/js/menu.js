@@ -90,3 +90,13 @@ function Begin(){
 function delay(time){
     return new Promise(resolve =>- setTimeout(resolve, time));
 }
+
+function Fin(){
+    $("#fin").show();
+
+    $("#clickBySecond").hide();
+    $('#jeu').hide();
+    $('#upgrade').hide();
+    $('#affichageBonus').hide();    
+    $("#zoneBas").hide();
+}
